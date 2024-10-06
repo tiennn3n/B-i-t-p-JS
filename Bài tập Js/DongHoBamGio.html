@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đồng hồ bấm giờ</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .stopwatch {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="stopwatch" id="display">00:00:00</div>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+    </div>
+
+    <script>
+        let h = 0, m = 0, s = 0;
+        let Dem;
+        let Run = false;
+        function Update() {
+            let formattedHours = String(h).padStart(2, '0');
+            let formattedMinutes = String(m).padStart(2, '0');
+            let formattedSeconds = String(s).padStart(2, '0');
+            document.getElementById('display').innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        }
+        document.getElementById('start').addEventListener('click', () => {
+            if (!Run) {
+                Run = true;
+                Dem = setInterval(() => {
+                    s++;
+                    if (s === 60) {
+                        s = 0;
+                        m++;
+                        if (m === 60) {
+                            m = 0;
+                            h++;
+                        }
+                    }
+                    Update();
+                }, 1000);
+            }
+        });
+        document.getElementById('stop').addEventListener('click', () => {
+            clearInterval(Dem);
+            Run = false;
+        });
+        document.getElementById('reset').addEventListener('click', () => {
+            clearInterval(Dem);
+            Run = false;
+            h = 0;
+            m = 0;
+            s = 0;
+            Update();
+        });
+        Update();
+    </script>
+
+</body>
+</html>

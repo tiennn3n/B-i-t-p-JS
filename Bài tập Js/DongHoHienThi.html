@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đồng hồ hiện thị</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .clock {
+            font-size: 3em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="clock" id="clock">00:00:00 AM</div>
+
+    <script>
+        function update() {
+            const now = new Date();
+            let h = now.getHours();
+            let m = now.getMinutes();
+            let s = now.getSeconds();
+            const time = h >= 12 ? 'PM' : 'AM';
+
+            h = h % 12;
+            h = h ? h : 12;
+
+            m = String(m).padStart(2, '0');
+            s = String(s).padStart(2, '0');
+
+            document.getElementById('clock').innerText = `${h}:${m}:${s} ${time}`;
+        }
+
+        setInterval(update, 1000);
+        update(); 
+    </script>
+
+</body>
+</html>

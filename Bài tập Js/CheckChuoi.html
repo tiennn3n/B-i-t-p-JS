@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra chuỗi đối xứng</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        input {
+            padding: 5px;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 5px, 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .result {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" id="inputString" placeholder="Nhập chuỗi" />
+    <button id="CheckChuoi">Kiểm tra</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById('CheckChuoi').addEventListener('click', () => {
+            const input = document.getElementById('inputString').value;
+            const XoaKytu = input.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+            const DaoNguoc = XoaKytu.split('').reverse().join('');
+            if (XoaKytu === DaoNguoc) {
+                document.getElementById('result').innerText = `"${input}" là chuỗi đối xứng.`;
+            } else {
+                document.getElementById('result').innerText = `"${input}" không phải là chuỗi đối xứng.`;
+            }
+        });
+    </script>
+
+</body>
+</html>
